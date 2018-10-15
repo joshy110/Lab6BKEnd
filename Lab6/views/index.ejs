@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GK-Mongo</title>
+</head>
+<body>
+  Implementos Deportivos GK
+
+  <ul class="implementosgk">
+  <% for(var i=0; i<implementosgk.length; i++) {%>
+    <li class="implementosgk">
+      <span><%= implementosgk[i].id %></span>
+      <span><%= implementosgk[i].nombre %></span>
+      <span><%= implementosgk[i].talla %></span>
+      <span><%= implementosgk[i].costo %></span>
+      <span><%= implementosgk[i].Descripcion %></span>
+    </li>
+  <% } %>
+  </ul>
+
+  <form action="/implementos" method="POST">
+    <input type="number" placeholder="id" name="id" id="id">
+    <input type="text" placeholder="nombre" name="nombre" id="nombre">
+    <input type="number" placeholder="talla" name="talla" id="talla">
+    <input type="number" placeholder="costo" name="costo" id="costo">
+    <input type="text" placeholder="Descripcion" name="Descripcion" id="Descripcion">
+    <button type="submit">Submit</button>
+</form>
+
+<div>
+  <h2>Actualizar Dato</h2>
+  <button id="update"> Actualizar </button>
+</div>
+
+<!-- se invoca para actualizar -->
+<script src="main.js"></script>
+</body>
+</html>
