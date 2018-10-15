@@ -28,6 +28,7 @@ app.get('/implementos', (req, res) => {
     db.collection('implementosgk').find().toArray((err, result) => {
       if (err) return console.log(err)
       // renders index.ejs
+      //res.send('index.ejs',{implementosgk: result})
       res.send({implementosgk: result})
     })
   })
