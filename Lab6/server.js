@@ -23,7 +23,7 @@ MongoClient.connect('mongodb://jdcm:lucia65fer52@ds131963.mlab.com:31963/imple-g
 })
 
 // GET ALL
-app.get('/', (req, res) => {
+app.get('/implementos', (req, res) => {
     //Arreglo que obtiene todo
     db.collection('implementosgk').find().toArray((err, result) => {
       if (err) return console.log(err)
@@ -31,23 +31,14 @@ app.get('/', (req, res) => {
       res.send({implementosgk: result})
     })
   })
-  
-// GET one
-app.get('/:id?', (req, res) => {
-    //Arreglo que obtiene todo
-    db.collection('implementosgk').find().toArray((err, result) => {
-      if (err) return console.log(err)
-      // renders index.ejs
-      res.send({implementosgk: result})
-    })
-  })
+
 // POST
 app.post('/implementos', (req, res) => {
     db.collection('implementosgk').save(req.body, (err, result) => {
         if (err) return console.log(err)
 
         console.log('saved to database')
-        res.redirect('/')
+        res.redirect('/implementos')
     })
 })
 
@@ -68,4 +59,14 @@ app.put('/implementos/:id?', (req, res) => {
       if (err) return res.send(err)
       res.send(result)
     })
+  })
+
+  //Delete
+  app.delete('/implementos/:id?', (req, res) => {
+    var id = req.params.id;
+    db.collection('implementosgk').findOneAndDelete({id: id }, (err, result) => {
+        if (err) return res.send(500,err)
+        res.send("Se elimino el  registro con Id =  " + id)
+      })
+
   })
