@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var cors = require('cors'); 
 const app = express();
+app.use(cors())
 
 //Se controla el MiddleWare
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -44,8 +46,8 @@ app.post('/implementos', (req, res) => {
 })
 
 // PUT
-app.put('/implementos/:id?', (req, res) => {
-    var id = req.params.id;
+app.put('/implementos', (req, res) => {
+    var id = req.body.id;
     db.collection('implementosgk').findOneAndUpdate({id: id }, {
       $set: {
         nombre: req.body.nombre,
@@ -63,8 +65,8 @@ app.put('/implementos/:id?', (req, res) => {
   })
 
   //Delete
-  app.delete('/implementos/:id?', (req, res) => {
-    var id = req.params.id;
+  app.delete('/implementos', (req, res) => {
+    var id = req.body.id;
     db.collection('implementosgk').findOneAndDelete({id: id }, (err, result) => {
         if (err) return res.send(500,err)
         res.send("Se elimino el  registro con Id =  " + id)
