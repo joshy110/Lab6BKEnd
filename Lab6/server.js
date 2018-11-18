@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var cors = require('cors'); 
 const app = express();
-app.use(cors())
+app.use(cors());
 
 //Se controla el MiddleWare
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -14,6 +14,12 @@ app.use(bodyParser.json())
 //MongoClient para conectarse
 const MongoClient = require('mongodb').MongoClient
 var db
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 //Conexion y se valida para que solamente entre cuando esta sea valida
 MongoClient.connect('mongodb://jdcm:lucia65fer52@ds131963.mlab.com:31963/imple-gk', (err, client) => {
