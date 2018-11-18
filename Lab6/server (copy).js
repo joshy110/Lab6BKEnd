@@ -15,13 +15,6 @@ app.use(bodyParser.json())
 const MongoClient = require('mongodb').MongoClient
 var db
 
-//Acept Origin Cors
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 //Conexion y se valida para que solamente entre cuando esta sea valida
 MongoClient.connect('mongodb://jdcm:lucia65fer52@ds131963.mlab.com:31963/imple-gk', (err, client) => {
     if (err) return console.log(err)
